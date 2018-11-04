@@ -40,7 +40,9 @@ module.exports = {
     'no-unused-vars':1,
     'space-before-blocks':[1,'never'],
     'space-before-function-paren':[1,'never'],
-    'space-infix-ops':['error',{"int32Hint":true}],
-    'spaced-comment':0
+    'space-infix-ops':[0,{"int32Hint":true}],
+    'spaced-comment':0,
+    'no-trailing-spaces':0,
+    'no-multiple-empty-lines':0
   }
 }
