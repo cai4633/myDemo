@@ -6,7 +6,7 @@
         <el-aside>
           <el-menu :default-active='activeIndex' active-text-color='#409EFF'  router>
             <h1>小demo</h1>
-            <el-menu-item v-for='item of navi' :index='item.index' :key='item.index'>{{item.title}}</el-menu-item>
+            <el-menu-item v-for='item of navi' :index='item.index' :key='item.index' :title='item.tip'>{{item.title}}</el-menu-item>
           </el-menu>
         </el-aside>
         <el-main>
@@ -58,7 +58,7 @@ export default {
 
 <style lang='less' scoped>
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Avenir', 'Helvetica', 'Arial',' sans-serif';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;

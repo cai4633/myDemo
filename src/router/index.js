@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '@/components/Home.vue';
 import Demo1 from '@/components/Demo1';
 import Demo2 from '@/components/Demo2';
+import Demo3 from '@/components/Demo3';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -25,6 +26,11 @@ export default new Router({
 			path:'/demo2',
 			name:'demo2',
 			component:Demo2
+		},
+		{
+			path:'/demo3',
+			name:'demo3',
+			component:Demo3
 		}
 	]
 });
