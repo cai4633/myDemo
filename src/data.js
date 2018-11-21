@@ -12,6 +12,10 @@ export default {
 				index:'demo3',
 				title:'简单的石英钟',
 				tip:'点击时钟可以打开或者关闭时钟声音'
+			},
+			{
+				index:'demo4',
+				title:'图片详情'
 			}
 	]
 };
