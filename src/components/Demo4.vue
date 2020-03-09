@@ -1,73 +1,111 @@
 <template>
-	<div>
-		<el-row :gutter='10'>
-			<el-col :span="6" v-for='image of images' :key='image.key' ><img :src='image.src' @mousemove.self='showDetails' @mouseout='show=false' ></el-col>
-		</el-row>
-		<div id="details" v-if='show' :style='{top:top,left:left}'>
-			<img :src="src" :width='imgWidth' ref='detailsImg'>
-		</div>
-	</div>
+  <div class="demo4">
+    <el-row :gutter="10">
+      <el-col :span="6" v-for="image of images" :key="image.key">
+        <img :alt="image.key" :src="image.src" @mousemove.self="showDetails" @mouseout="show=false" :style="{cursor:cursor}" />
+      </el-col>
+    </el-row>
+    <transition name="move">
+      <div v-if="show" :style="{top:top,left:left}" id="details">
+        <img :src="src" :width="imgWidth" ref="detailsImg" />
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script>
 export default {
-  name:'Demo4',
+  name: 'Demo4',
   data(){
-    return {
-    	images:[
-    		{
-    			key:1,
-    			src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542819064680&di=3101c979b3e4343c358a2b2ff569d733&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fpmop%2F2018%2F1012%2FA2D317ECE34F008B2362E5E0BA47FC521B93C5C7_size93_w1000_h587.jpeg'
-    		},
-    		{
-    			key:2,
-    			src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542819064680&di=77501557a4da4214516ffed97d5ac8e6&imgtype=0&src=http%3A%2F%2F00imgmini.eastday.com%2Fmobile%2F20181018%2F20181018020857_b0483443db9ba177b4ad36915f35deb9_2.jpeg'
-    		},
-    		{
-    			key:3,
-    			src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542819343138&di=4a45fbeb450146e3c303e7f1113d3c08&imgtype=0&src=http%3A%2F%2Fpic2.orsoon.com%2F2017%2F0726%2F20170726090559939.png'
-    		},
-    		{
-    			key:4,
-    			src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542819343134&di=61a5888567afe9280c2a5cb97df5feb4&imgtype=0&src=http%3A%2F%2Ftc.sinaimg.cn%2Fmaxwidth.2048%2Ftc.service.weibo.com%2Fp1_pstatp_com%2F95eaefe91f2c75e196c78033c623588b.jpg'
-    		}
-    	],
-    	show:false,
-    	top:0,
-    	left:0,
-    	src:'',
-    	imgWidth:0
+    return{
+      cursor: 'pointer',
+      pointer: true,
+      images: [
+        {
+          key: 1,
+          src: '/static/images/lyf1.jpg'
+        },
+        {
+          key: 2,
+          src: '/static/images/lyf2.jpg'
+        },
+        {
+          key: 3,
+          src: '/static/images/lyf3.jpg'
+        },
+        {
+          key: 4,
+          src: '/static/images/lyf4.jpg'
+        },
+        {
+          key: 5,
+          src: '/static/images/lyf5.jpg'
+        },
+        {
+          key: 6,
+          src: '/static/images/lyf6.jpg'
+        },
+        {
+          key: 7,
+          src: '/static/images/lyf7.jpg'
+        },
+        {
+          key: 8,
+          src: '/static/images/lyf8.jpg'
+        }
+      ],
+      show: false,
+      top: '0px',
+      left: '0px',
+      src: '',
+      imgWidth: 0
     };
   },
-  methods:{
-  	showDetails:function(evt){
-  		let oleft=this.$el.offsetLeft;
-  		let otop=this.$el.offsetTop;	//获取当前窗口相对于浏览器可视区域的left和top；
-  		let owidth=this.$el.offsetWidth;
-  		this.show=true;
-  		this.top=evt.clientY-otop+15+'px';
-  		this.left=evt.clientX-oleft+15+'px';
-  		this.src=evt.target.src;
-  		this.imgWidth=0.6*owidth;	//详情图片的宽度设为main窗口宽度的60%；
-  	}
+  methods: {
+    showDetails: function(evt){
+      let oleft = this.$el.offsetLeft;
+      let otop = this.$el.offsetTop; //获取当前窗口相对于浏览器可视区域的left和top；
+      let owidth = this.$el.offsetWidth;
+      let oheight = document.body.clientHeight; // 获取浏览器可视窗口高度
+      let imgHeight;
+      this.src = evt.target.src;
+      this.show = true;
+      this.imgWidth = 0.5 * owidth;
+      //当鼠标位于页面左半部分，让图片显示在鼠标右侧，否则让图片显示在鼠标左侧
+      this.left = evt.clientX - oleft < 0.5 * owidth ? evt.clientX - oleft + 15 + 'px' : evt.clientX - oleft - this.imgWidth - 5 + 'px';
+      this.$nextTick(() => {
+        imgHeight = this.$refs.detailsImg.height;
+        //当鼠标位于页面上半部分，让图片显示在鼠标下侧，否则让图片显示在鼠标上侧
+        //this.$parent.$el.scrollTop 获取el-main滚动条的高度；
+        this.top = oheight - 30 - evt.clientY > imgHeight ? evt.pageY - otop + 15 + this.$parent.$el.scrollTop + 'px' : evt.pageY - otop + this.$parent.$el.scrollTop - 5 - imgHeight + 'px'; 
+		});
+    }
   }
 };
 </script>
 <style lang="less" scoped>
-	div{
-		position: relative;
+.demo4 {
+  position: relative;
+  overflow: visible;
+  height: 100%;
+  box-sizing: border-box;
+  .el-col img {
+    width: 100%;
+    height: 150px;
+  }
 
-		.el-col img{
-			width:100%;
-			height: 150px;
-			&:hover{
-				cursor: pointer;
-			}
-		}
-
-		#details{
-			position: absolute;
-		}
-		
-	}
+  #details {
+    position: absolute;
+    z-index: 100;
+  }
+  .move-enter,.move-leave-to {
+    opacity: 0;
+  }
+  .move-enter-to,.move-leave {
+    opacity: 1;
+  }
+  .move-enter-active,.move-leave-active {
+    transition: all 0.2s linear;
+  }
+}
 </style>

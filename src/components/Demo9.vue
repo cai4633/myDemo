@@ -11,55 +11,55 @@
 
 <script>
 export default {
-  name:'Demo4',
+  name: 'Demo4',
 
   data(){
-    return {
-    	year:2010,
-    	china:{
-    		2005:100,
-    		2006:200,
-    		2007:400,
-    		2008:500,
-    		2009:600,
-    		2010:700,
-    		2011:900,
-    		2012:1100
+    return{
+    	year: 2010,
+    	china: {
+    		2005: 100,
+    		2006: 200,
+    		2007: 400,
+    		2008: 500,
+    		2009: 600,
+    		2010: 700,
+    		2011: 900,
+    		2012: 1100
     	},
-    	usa:{
-    		2005:100,
-    		2006:200,
-    		2007:400,
-    		2008:500,
-    		2009:600,
-    		2010:700,
-    		2011:950,
-    		2012:1120
+    	usa: {
+    		2005: 100,
+    		2006: 200,
+    		2007: 400,
+    		2008: 500,
+    		2009: 600,
+    		2010: 700,
+    		2011: 950,
+    		2012: 1120
     	}
     };
   },
-  methods:{
-  	preYear:function(){
-  		let minYear=Math.min(...Object.keys(this.usa));
-  		if (this.year > minYear){
+  methods: {
+  	preYear: function(){
+  		let minYear = Math.min(...Object.keys(this.usa));
+  		if(this.year > minYear){
   			this.year--;
   		}
   	},
-  	nextYear:function(){
-  		let maxYear=Math.max(...Object.keys(this.usa));
-  		if (this.year < maxYear){
+  	nextYear: function(){
+  		let maxYear = Math.max(...Object.keys(this.usa));
+  		if(this.year < maxYear){
   			this.year++;
-  			let area=[this.china[this.year],this.usa[this.year]];
+  			let area = [this.china[this.year],this.usa[this.year]];
   			console.log(area);
   		}
   	},
-  	drawRectAnimation:function(canvas,startY,end,color,speed=10,stratX=50,height=30){
-  		let wid=0;
+  	drawRectAnimation: function(canvas,startY,end,color,speed = 10,stratX = 50,height = 30){
+  		let wid = 0;
   		function rd(){
-	  		if (wid<end){
-				wid+=speed;
+	  		if(wid < end){
+				wid += speed;
   				canvas.beginPath();
-  				canvas.fillStyle=color;
+  				canvas.fillStyle = color;
   				//beginPath()一般要搭配路径来使用，而原生的绘制函数fillRect不需要beginPath();
   				canvas.fillRect(stratX,startY,wid,30); 
   				window.requestAnimationFrame(rd);
@@ -69,12 +69,12 @@ export default {
   	}
   },
   mounted(){
-  	let canvas=this.$refs.canvas;
-  	const WIDTH=800;
-  	const HEIGHT=400;
-  	canvas.height=HEIGHT;
-  	canvas.width=WIDTH;
-  	let cvs=canvas.getContext('2d');
+  	let canvas = this.$refs.canvas;
+  	const WIDTH = 800;
+  	const HEIGHT = 400;
+  	canvas.height = HEIGHT;
+  	canvas.width = WIDTH;
+  	let cvs = canvas.getContext('2d');
 	//数据变化；
 	this.drawRectAnimation(cvs,10,200,'#49DDCA',1);
 	this.drawRectAnimation(cvs,50,400,'red',2);

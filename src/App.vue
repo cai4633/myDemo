@@ -3,7 +3,7 @@
     <el-container style='height: 100%;'>
       <el-header>小鬼头的小练习</el-header>
       <el-container style=' flex: 1 1 auto; padding: 0px 20px;'>
-        <el-aside>
+        <el-aside width='220px'>
           <el-menu :default-active='activeIndex' active-text-color='#409EFF'  router>
             <h1>小demo</h1>
             <el-menu-item v-for='item of navi' :index='item.index' :key='item.index' :title='item.tip'>{{item.title}}</el-menu-item>
@@ -13,23 +13,20 @@
           <router-view/>
         </el-main>
       </el-container>
-
       <el-footer></el-footer>
     </el-container>
-     </div>
+  </div>
 </template>
 
 <script>
-import Data from './data.js';
+import Data from'./data.js';
 export default {
-	name:'App',
+	name: 'App',
   data(){
-    return {
-      activeIndex:'demo1',
-      navi:Data.navi
+    return{
+      activeIndex: 'demo1',
+      navi: Data.navi
     };
-  },
-  components:{
   }
 };
 </script>
@@ -75,6 +72,7 @@ export default {
     }
     .el-aside{
       border:1px solid #E8E5E5;
+      // border:3px solid #D8181 8;
     }
     .el-footer{
       background:#909399;
@@ -95,7 +93,8 @@ export default {
 
     }
     .el-main{
-      padding: 0px;
+      padding: 5px;
+      overflow: visible;
     }
   }
 </style>

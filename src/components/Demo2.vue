@@ -50,111 +50,111 @@
 
 <script>
 export default {
-	name:'Demo2',
+	name: 'Demo2',
 
 	data(){
-		return {
-			input1:'0',
-			input2:'',
-			NUM:/^[0-9.]+$/,
-			OPERATOR:/[+\-÷×%=]/,
-			optStack:['#'],
-			temp:[],
-			eqlForbid:false
+		return{
+			input1: '0',
+			input2: '',
+			NUM: /^[0-9.]+$/,
+			OPERATOR: /[+\-÷×%=]/,
+			optStack: ['#'],
+			temp: [],
+			eqlForbid: false
 		};
 	},
 
-	methods:{
+	methods: {
 		// vue组件@___目前只接收自定义事件，接受原生事件时需要加上.native；
 		// 采用逆波兰表达式原理实现；
-	  	fn1:function(event){
+	  	fn1: function(event){
 	  		let trgt = event.target.innerText;
 
-	  		if (this.NUM.test(trgt) && this.input1.length < 8){	
+	  		if(this.NUM.test(trgt) && this.input1.length < 8){	
 	  			//trgt的是数字且input1中字符不大于8；
 	  			this.input1 = (parseFloat(this.input1) ? (parseFloat(this.input1) + trgt) : trgt);
-	  		} else if (this.OPERATOR.test(trgt)){	//点击运算符
-	  			if (!this.OPERATOR.test(this.input1)){
-					if (trgt !== '='){
+	  		}else if(this.OPERATOR.test(trgt)){	//点击运算符
+	  			if(!this.OPERATOR.test(this.input1)){
+					if(trgt !== '='){
 						this.eqlForbid || this.temp.push(this.input1);	//input1中是数字直接push到temp；
 		  				//比较运算符优先级；当输入运算符等级较低时，将opStack中的运算符弹出，压入temp中；
-						while (!this.comparison(trgt,this.optStack[this.optStack.length-1])){
-							let ops=this.optStack.pop();
+						while(!this.comparison(trgt,this.optStack[this.optStack.length - 1])){
+							let ops = this.optStack.pop();
 							this.computer(ops);		//实时计算；
 						}
 						this.optStack.push(trgt);
-			  			this.input2+=this.input1+trgt;
+			  			this.input2 += this.input1 + trgt;
 						this.input1 = trgt;
-						this.eqlForbid=false;
-					} else {	
+						this.eqlForbid = false;
+					}else{	
 						//点击‘=’
-						if (!this.eqlForbid){
+						if(!this.eqlForbid){
 							this.temp.push(this.input1);	//input1中是数字直接push到temp；
-							this.input2+=this.input1+trgt;
-							while (this.optStack.length>1){
-								let ops=this.optStack.pop();
+							this.input2 += this.input1 + trgt;
+							while(this.optStack.length > 1){
+								let ops = this.optStack.pop();
 								this.computer(ops);		//实时计算；
 							}
 							// 固定小数点位数为7;
 							this.input1 = /\d+\.\d{7,}/.test(this.temp[0]) ? this.temp[0].toFixed(7) : this.temp[0];
-							this.eqlForbid=true;
+							this.eqlForbid = true;
 						}
 			  		}
-	  			} else {
+	  			}else{
 	  				alert('运算符输入错误！');
 	  				// throw new Error('运算符输入错误！');
 	  			}
 	  		}
 	  	},
 
-	  	equalOp:function(){
+	  	equalOp: function(){
 
 	  	},
-	  	comparison:function(op1,op2){
-	  		let degrees={	//定义运算符优先级；
-	  			'#':0,
-	  			'+':1,
-	  			'-':1,
-	  			'*':1,
-	  			'/':2,
-	  			'×':2,
-	  			'÷':2,
-	  			'%':2
+	  	comparison: function(op1,op2){
+	  		let degrees = {	//定义运算符优先级；
+	  			'#': 0,
+	  			'+': 1,
+	  			'-': 1,
+	  			'*': 1,
+	  			'/': 2,
+	  			'×': 2,
+	  			'÷': 2,
+	  			'%': 2
 	  		};
-	  		return degrees[op1]>degrees[op2];
+	  		return degrees[op1] > degrees[op2];
 	  	},
 
-	  	clear:function(){	//清空计算器；
-	  		this.input1='0';
-	  		this.input2='';
-	  		this.optStack=['#'];
-	  		this.temp=[];
-	  		this.eqlForbid=false;
+	  	clear: function(){	//清空计算器；
+	  		this.input1 = '0';
+	  		this.input2 = '';
+	  		this.optStack = ['#'];
+	  		this.temp = [];
+	  		this.eqlForbid = false;
 	  	},
 
-	  	computer:function(op){
+	  	computer: function(op){
 	  		let rlt;
-	  		let thisTemp=this.temp;
-	  		switch (op){
-	  			case '+':
-	  				rlt=parseFloat(thisTemp[thisTemp.length-2])+parseFloat(thisTemp[thisTemp.length-1]);
-	  				this.temp.splice(thisTemp.length-2,2,rlt);
+	  		let thisTemp = this.temp;
+	  		switch(op){
+	  			case'+':
+	  				rlt = parseFloat(thisTemp[thisTemp.length - 2]) + parseFloat(thisTemp[thisTemp.length - 1]);
+	  				this.temp.splice(thisTemp.length - 2,2,rlt);
 	  				break;
-	  			case '-':
-	  				rlt=parseFloat(thisTemp[thisTemp.length-2])-parseFloat(thisTemp[thisTemp.length-1]);
-	  				this.temp.splice(thisTemp.length-2,2,rlt);
+	  			case'-':
+	  				rlt = parseFloat(thisTemp[thisTemp.length - 2]) - parseFloat(thisTemp[thisTemp.length - 1]);
+	  				this.temp.splice(thisTemp.length - 2,2,rlt);
 	  				break;
-	  			case '×':
-	  				rlt=parseFloat(thisTemp[thisTemp.length-2])*parseFloat(thisTemp[thisTemp.length-1]);
-	  				this.temp.splice(thisTemp.length-2,2,rlt);
+	  			case'×':
+	  				rlt = parseFloat(thisTemp[thisTemp.length - 2]) * parseFloat(thisTemp[thisTemp.length - 1]);
+	  				this.temp.splice(thisTemp.length - 2,2,rlt);
 	  				break;
-	  			case '÷':
-	  				rlt=parseFloat(thisTemp[thisTemp.length-2])/parseFloat(thisTemp[thisTemp.length-1]);
-	  				this.temp.splice(thisTemp.length-2,2,rlt);
+	  			case'÷':
+	  				rlt = parseFloat(thisTemp[thisTemp.length - 2]) / parseFloat(thisTemp[thisTemp.length - 1]);
+	  				this.temp.splice(thisTemp.length - 2,2,rlt);
 	  				break;
-	  			case '%':
-	  				rlt=parseFloat(thisTemp[thisTemp.length-2])%parseFloat(thisTemp[thisTemp.length-1]);
-	  				this.temp.splice(thisTemp.length-2,2,rlt);
+	  			case'%':
+	  				rlt = parseFloat(thisTemp[thisTemp.length - 2]) % parseFloat(thisTemp[thisTemp.length - 1]);
+	  				this.temp.splice(thisTemp.length - 2,2,rlt);
 	  				break;
 	  		}
 	    }

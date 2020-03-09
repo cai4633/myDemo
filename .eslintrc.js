@@ -33,16 +33,18 @@ module.exports = {
     'semi':[2,'always'],
     'key-spacing':[1,{
       'beforeColon':false,
-      'afterColon':false
+      'afterColon':true
     }],
     'no-mixed-spaces-and-tabs':'off',
     "one-var": ["error", {"var": "always", "let": "never", "const": "never" }],
     'no-unused-vars':1,
     'space-before-blocks':[1,'never'],
     'space-before-function-paren':[1,'never'],
-    'space-infix-ops':[0,{"int32Hint":true}],
+    'space-infix-ops':[1,{"int32Hint":true}],
     'spaced-comment':0,
     'no-trailing-spaces':0,
-    'no-multiple-empty-lines':0
+    'no-multiple-empty-lines':0,
+    'keyword-spacing': [1, { "before": false,'after':false }],
+    'padding-blocks': [0],
   }
 }

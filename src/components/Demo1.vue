@@ -16,18 +16,18 @@
 
 <script>
 export default {
-  name:'demo1',
+  name: 'demo1',
   data(){
-    return {
-    	leftVal:'0px',
-    	showP:false,
-    	arr:[false,false,false,false,false],
-    	storage:[],
-    	clickIfo:'',
-    	hoverIfo:'',
-    	scores:'',
-    	title:'',
-    	aMsg:[
+    return{
+    	leftVal: '0px',
+    	showP: false,
+    	arr: [false,false,false,false,false],
+    	storage: [],
+    	clickIfo: '',
+    	hoverIfo: '',
+    	scores: '',
+    	title: '',
+    	aMsg: [
 				'很不满意|差得太离谱，与卖家描述的严重不符，非常不满',
 				'不满意|部分有破损，与卖家描述的不符，不满意',
 				'一般|质量一般，没有卖家描述的那么好',
@@ -36,11 +36,11 @@ export default {
 				]
     };
   },
-  methods:{
-  	clickMsg:function(evt){	/*click事件*/
+  methods: {
+  	clickMsg: function(evt){	/*click事件*/
   		let index = parseInt(evt.currentTarget.innerHTML);
   		this.arr = [false,false,false,false,false];
-  		if (index){
+  		if(index){
   			this.clickIfo = '(' + this.aMsg[index - 1].match(/\|(.+)/)[1] + ')';
   			this.arr = this.arr.map(function(item,idx){
   				return idx < index;
@@ -49,14 +49,14 @@ export default {
 	  	this.scores = index + '分';
   		}
   	},
-  	hoverMsg:function(evt){	/*mouseover事件；*/
+  	hoverMsg: function(evt){	/*mouseover事件；*/
   		let tgt = evt.currentTarget;
   		let index = parseInt(tgt.innerHTML);
   		this.storage = this.arr;
   		this.title = index + '分' + ' ' + this.aMsg[index - 1].match(/(.+)\|/)[1];
   		this.hoverIfo = this.aMsg[index - 1].match(/\|(.+)/)[1];
 	  	this.arr = [false,false,false,false,false];
-  		if (index){
+  		if(index){
   			index = parseInt(index);
   			this.arr = this.arr.map(function(item,idx){
   				return idx < index;
@@ -65,7 +65,7 @@ export default {
   		this.leftVal = tgt.offsetLeft + tgt.offsetWidth / 2 - 90 + 'px';
   		this.showP = true;
   	},
-  	reset:function(){
+  	reset: function(){
   		this.arr = this.storage;
   		this.showP = false;
   	}
