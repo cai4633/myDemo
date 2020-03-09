@@ -17,35 +17,35 @@
 		        images: [
 		    		{
 		    			key: 1,
-		    			src: '/static/images/lyf1.jpg'
+		    			src: 'static/images/lyf1.jpg'
 		    		},
 		    		{
 		    			key: 2,
-		    			src: '/static/images/lyf2.jpg'
+		    			src: 'static/images/lyf2.jpg'
 		    		},
 		    		{
 		    			key: 3,
-		    			src: '/static/images/lyf3.jpg'
+		    			src: 'static/images/lyf3.jpg'
 		    		},
 		    		{
 		    			key: 4,
-		    			src: '/static/images/lyf4.jpg'
+		    			src: 'static/images/lyf4.jpg'
 		    		},
 		    		{
 		    			key: 5,
-		    			src: '/static/images/lyf5.jpg'
+		    			src: 'static/images/lyf5.jpg'
 		    		},
 			 		{
 		    			key: 6,
-		    			src: '/static/images/lyf6.jpg'
+		    			src: 'static/images/lyf6.jpg'
 		    		},
 		    		{
 		    			key: 7,
-		    			src: '/static/images/lyf7.jpg'
+		    			src: 'static/images/lyf7.jpg'
 		    		},
 			 		{
 		    			key: 8,
-		    			src: '/static/images/lyf8.jpg'
+		    			src: 'static/images/lyf8.jpg'
 		    		}
 		    	]
             };
